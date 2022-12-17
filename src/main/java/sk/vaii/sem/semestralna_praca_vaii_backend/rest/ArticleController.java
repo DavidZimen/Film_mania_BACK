@@ -50,6 +50,11 @@ public class ArticleController {
         }
     }
 
+    @PutMapping("update")
+    public Article updateArticle(@RequestBody Article article) {
+        return this.articleService.updateArticle(article);
+    }
+
     private Article convertToEntity(ArticleCreation articleCreation) throws ParseException {
          return modelMapper.map(articleCreation, Article.class);
     }
