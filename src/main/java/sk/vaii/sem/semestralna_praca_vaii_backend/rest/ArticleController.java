@@ -1,6 +1,5 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.rest;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sk.vaii.sem.semestralna_praca_vaii_backend.dto.ArticleCreation;
@@ -18,12 +17,9 @@ public class ArticleController {
 
     private final ArticleService articleService;
 
-    private final ModelMapper modelMapper;
-
     @Autowired
-    public ArticleController(ArticleService articleService, ModelMapper modelMapper) {
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping("all")
@@ -43,19 +39,12 @@ public class ArticleController {
 
     @PostMapping("add")
     public Article addArticle(@RequestBody ArticleCreation articleCreation) {
-        try {
-            return this.articleService.addArticle(this.convertToEntity(articleCreation));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        //TODO implement mapper
+        return this.articleService.addArticle(articleCreation);
     }
 
     @PutMapping("update")
     public Article updateArticle(@RequestBody Article article) {
         return this.articleService.updateArticle(article);
-    }
-
-    private Article convertToEntity(ArticleCreation articleCreation) throws ParseException {
-         return modelMapper.map(articleCreation, Article.class);
     }
 }
