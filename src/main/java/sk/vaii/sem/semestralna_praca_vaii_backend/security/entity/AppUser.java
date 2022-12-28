@@ -8,8 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "app_user")
@@ -23,12 +24,12 @@ public class AppUser implements Serializable, UserDetails {
     private Long id;
     private String fisrtName;
     private String lastName;
-    @Temporal(TemporalType.DATE)
-    private Date birth_date;
+    private LocalDate birth_date;
+    @Column(unique = true)
     private String email;
     private String password;
     private Boolean locked = false;
-    private Boolean enabled = false ;
+    private Boolean enabled = true ;
 
     @ManyToMany
     @JoinTable(
@@ -40,7 +41,7 @@ public class AppUser implements Serializable, UserDetails {
                     name = "role_id", referencedColumnName = "id"
             )
     )
-    private Collection<Role> roles;
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

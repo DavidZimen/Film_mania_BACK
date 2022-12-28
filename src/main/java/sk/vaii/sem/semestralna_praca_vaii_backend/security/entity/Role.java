@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -21,7 +22,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<AppUser> appUsers;
+    private List<AppUser> appUsers;
 
     @ManyToMany
     @JoinTable(
@@ -33,7 +34,7 @@ public class Role {
                     name = "privilege_id", referencedColumnName = "id"
             )
     )
-    private Collection<Privilege> privileges;
+    private List<Privilege> privileges;
 
     public Role(String name) {
         this.name = name;

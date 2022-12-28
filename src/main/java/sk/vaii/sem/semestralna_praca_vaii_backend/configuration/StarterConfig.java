@@ -14,10 +14,10 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.UserReposi
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 @Component
-public class StarterConfiguration implements ApplicationListener<ContextRefreshedEvent> {
+public class StarterConfig implements ApplicationListener<ContextRefreshedEvent> {
 
     boolean alreadySetup = true;
 
@@ -46,13 +46,13 @@ public class StarterConfiguration implements ApplicationListener<ContextRefreshe
         this.createRoleIfNotFound("ROLE_AUTHOR", Arrays.asList(readPrivilege, writePrivilege));
         this.createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
 
-        Role userRole = this.roleRepository.findByName("ROLE_USER");
+        Role authorRole = this.roleRepository.findByName("ROLE_AUTHOR");
         AppUser appUser = new AppUser();
-        appUser.setFisrtName("user");
-        appUser.setLastName("user");
-        appUser.setPassword(passwordEncoder.encode("user"));
-        appUser.setEmail("user@user.com");
-        appUser.setRoles(Arrays.asList(userRole));
+        appUser.setFisrtName("author");
+        appUser.setLastName("author");
+        appUser.setPassword(passwordEncoder.encode("author"));
+        appUser.setEmail("author@author.com");
+        appUser.setRoles(Arrays.asList(authorRole));
         appUser.setEnabled(true);
         userRepository.save(appUser);
 
@@ -72,7 +72,7 @@ public class StarterConfiguration implements ApplicationListener<ContextRefreshe
 
     @Transactional
     Role createRoleIfNotFound(
-            String name, Collection<Privilege> privileges) {
+            String name, List<Privilege> privileges) {
 
         Role role = this.roleRepository.findByName(name);
         if (role == null) {
