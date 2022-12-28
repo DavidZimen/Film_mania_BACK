@@ -32,7 +32,8 @@ public class ArticleService {
     }
 
     public Article addArticle(ArticleCreation articleCreation) {
-        return this.articleRepository.save(this.articleMapper.articleCreationToArticle(articleCreation));
+        Article article = this.articleMapper.articleCreationToArticle(articleCreation);
+        return this.articleRepository.save(article);
     }
 
     public Article updateArticle(Article article) {

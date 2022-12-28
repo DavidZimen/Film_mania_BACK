@@ -39,7 +39,6 @@ public class ArticleController {
 
     @PostMapping("add")
     public Article addArticle(@RequestBody ArticleCreation articleCreation) {
-        //TODO implement mapper
         return this.articleService.addArticle(articleCreation);
     }
 
