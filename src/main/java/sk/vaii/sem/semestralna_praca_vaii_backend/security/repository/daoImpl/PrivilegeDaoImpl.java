@@ -1,7 +1,7 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.daoImpl;
 
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.entity.Privilege;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.entity.Role;
+import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Privilege;
+import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Role;
 import sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.dao.PrivilegeDao;
 
 import javax.persistence.EntityManager;
@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.List;
-import java.util.Optional;
 
 public class PrivilegeDaoImpl implements PrivilegeDao {
 

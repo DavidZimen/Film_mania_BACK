@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.dto.RoleDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.dto.RoleDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.security.service.RoleService;
-
-import java.util.List;
 
 @RestController
 @AllArgsConstructor

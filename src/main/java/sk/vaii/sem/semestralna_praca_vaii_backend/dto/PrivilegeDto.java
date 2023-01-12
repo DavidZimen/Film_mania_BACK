@@ -1,4 +1,4 @@
-package sk.vaii.sem.semestralna_praca_vaii_backend.security.dto;
+package sk.vaii.sem.semestralna_praca_vaii_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

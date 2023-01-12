@@ -1,8 +1,8 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.mapper;
 
 import org.mapstruct.Mapper;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.dto.PrivilegeDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.entity.Privilege;
+import sk.vaii.sem.semestralna_praca_vaii_backend.dto.PrivilegeDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Privilege;
 
 import java.util.List;
 

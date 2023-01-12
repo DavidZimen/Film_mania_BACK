@@ -1,11 +1,11 @@
-package sk.vaii.sem.semestralna_praca_vaii_backend.security.entity;
+package sk.vaii.sem.semestralna_praca_vaii_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -22,6 +22,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<AppUser> appUsers;
 
     @ManyToMany

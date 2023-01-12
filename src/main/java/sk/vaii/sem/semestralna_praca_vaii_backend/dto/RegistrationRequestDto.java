@@ -1,8 +1,6 @@
-package sk.vaii.sem.semestralna_praca_vaii_backend.security.dto;
+package sk.vaii.sem.semestralna_praca_vaii_backend.dto;
 
 import lombok.*;
-
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +13,5 @@ public class RegistrationRequestDto {
     private String email;
     private String birth_date;
     private String role;
+    private long avatarId;
 }

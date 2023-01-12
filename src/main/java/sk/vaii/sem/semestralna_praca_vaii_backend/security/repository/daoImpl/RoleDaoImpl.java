@@ -1,15 +1,13 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.daoImpl;
 
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.entity.AppUser;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.entity.Role;
+import sk.vaii.sem.semestralna_praca_vaii_backend.entities.AppUser;
+import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Role;
 import sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.dao.RoleDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.util.List;
-import java.util.Optional;
 
 public class RoleDaoImpl implements RoleDao {
 

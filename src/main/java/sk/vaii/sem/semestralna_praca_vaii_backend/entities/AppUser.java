@@ -1,4 +1,4 @@
-package sk.vaii.sem.semestralna_praca_vaii_backend.security.entity;
+package sk.vaii.sem.semestralna_praca_vaii_backend.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +42,13 @@ public class AppUser implements Serializable, UserDetails {
             )
     )
     private List<Role> roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    private AppUserAvatar avatar;
+
+    @OneToMany(mappedBy = "author")
+    private List<Article> article;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

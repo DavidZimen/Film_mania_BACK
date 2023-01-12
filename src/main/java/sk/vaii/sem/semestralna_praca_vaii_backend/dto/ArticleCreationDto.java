@@ -6,7 +6,9 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ArticleCreation {
+public class ArticleCreationDto {
     private String title;
     private String text;
+    private String author_email;
+    private Long image_id;
 }

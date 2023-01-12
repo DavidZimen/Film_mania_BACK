@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.dto.PrivilegeDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.dto.PrivilegeDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.security.service.PrivilegeService;
 
 import java.util.List;

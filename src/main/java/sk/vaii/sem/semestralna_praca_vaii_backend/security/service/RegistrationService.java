@@ -3,12 +3,14 @@ package sk.vaii.sem.semestralna_praca_vaii_backend.security.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.AppUserMapper;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.dto.LoggedInUserDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.dto.RegistrationRequestDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.dto.LoggedInUserDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.dto.RegistrationRequestDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.security.email.EmailValidator;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.entity.AppUser;
+import sk.vaii.sem.semestralna_praca_vaii_backend.entities.AppUser;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 @Service
@@ -30,6 +32,11 @@ public class RegistrationService {
         AppUser appUser = this.appUserMapper.registrationRequestToAppUser(request);
         appUser.setRoles(Arrays.asList(this.roleService.findRoleByName(request.getRole())));
 
-        return this.appUserService.singUpUser(appUser);
+        return this.appUserService.singUpUser(appUser, request.getAvatarId());
+    }
+
+    @Transactional
+    public long uploadAvatarImage(MultipartFile avatarImage) throws IOException {
+        return this.appUserService.uploadAvatar(avatarImage).getId();
     }
 }
