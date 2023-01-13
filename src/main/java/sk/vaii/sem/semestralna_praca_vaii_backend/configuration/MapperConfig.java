@@ -3,10 +3,7 @@ package sk.vaii.sem.semestralna_praca_vaii_backend.configuration;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.AppUserMapper;
-import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.ArticleMapper;
-import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.PrivilegeMapper;
-import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.RoleMapper;
+import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.*;
 
 @Configuration
 public class MapperConfig {
@@ -28,5 +25,10 @@ public class MapperConfig {
     @Bean
     PrivilegeMapper privilegeMapper() {
         return Mappers.getMapper(PrivilegeMapper.class);
+    }
+
+    @Bean
+    FilmMapper filmMapper() {
+        return Mappers.getMapper(FilmMapper.class);
     }
 }

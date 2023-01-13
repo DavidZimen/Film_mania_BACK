@@ -33,6 +33,10 @@ public class Film {
     @Column(name = "duration", nullable = false)
     private int duration;
 
+    @ManyToOne
+    @JoinColumn(name = "director_id", nullable = false)
+    private Director director;
+
     @ManyToMany
     @JoinTable(
             name = "film_actor",
@@ -45,9 +49,17 @@ public class Film {
     )
     private List<Actor> actors;
 
-    @ManyToOne
-    @JoinColumn(name = "director_id", nullable = false)
-    private Director director;
+    @ManyToMany
+    @JoinTable(
+            name = "film_genre",
+            joinColumns = @JoinColumn(
+                    name = "film_id", referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "genre_id", referencedColumnName = "id"
+            )
+    )
+    private List<Genre> genres;
 
     @OneToMany(mappedBy = "film")
     private List<Rating> ratings;

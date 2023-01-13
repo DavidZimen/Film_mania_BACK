@@ -23,6 +23,12 @@ public class Actor {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "description", columnDefinition = "TEXT", nullable = false)
+    private String description;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "actor_image_id", referencedColumnName = "id")
     private FilmPartImage actorImage;
