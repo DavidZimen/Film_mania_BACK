@@ -5,12 +5,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import sk.vaii.sem.semestralna_praca_vaii_backend.entities.AppUser;
-import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Privilege;
-import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Role;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.PrivilegeRepository;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.RoleRepository;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.repository.AppUserRepository;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.entities.AppUser;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_security.entities.Privilege;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_security.entities.Role;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_security.repository.PrivilegeRepository;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_security.repository.RoleRepository;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.repositoriy.AppUserRepository;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;

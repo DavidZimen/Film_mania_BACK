@@ -2,10 +2,10 @@ package sk.vaii.sem.semestralna_praca_vaii_backend.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import sk.vaii.sem.semestralna_praca_vaii_backend.dto.ArticleCreationDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.dto.ArticleInAuthorsListDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.dto.ArticleInMainListDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.entities.Article;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.dto.ArticleCreationDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.dto.ArticleInAuthorsListDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.dto.ArticleInMainListDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.entity.Article;
 
 import java.util.List;
 

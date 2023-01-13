@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import sk.vaii.sem.semestralna_praca_vaii_backend.security.service.AppUserService;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.service.AppUserService;
 
 import java.util.Arrays;
 
