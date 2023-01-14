@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.FilmMapper;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmAddDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Actor;
-import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Director;
-import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Film;
-import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Genre;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmInTableDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.*;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.FilmRepository;
 
 import java.util.ArrayList;
@@ -23,6 +21,8 @@ public class FilmService {
     private final DirectorService directorService;
     private final ActorService actorService;
     private final GenreService genreService;
+
+    private final RatingService ratingService;
 
     public Film addFilm(FilmAddDto filmAddDto) {
         Film film = this.filmMapper.filmAddDtotoFilm(filmAddDto);
@@ -49,6 +49,32 @@ public class FilmService {
 
         //persist in DB
         return this.filmRepository.save(film);
+    }
+
+    public List<FilmInTableDto> getAllFilmsForTable(Long userId) {
+        List<Film> films = this.filmRepository.findAll();
+        List<FilmInTableDto> filmInTableDtos = this.filmMapper.filmsToFilmInTableDtos(films);
+
+        for (int i = 0; i < films.size(); i++) {
+            double avgRating = this.ratingService.convertToAverageRating(films.get(i).getRatings());
+            filmInTableDtos.get(i).setOverallRating(avgRating);
+            if (userId != null) {
+                Optional<Rating> rating = this.ratingService.getUserRatingOfFilm(userId, films.get(i).getId());
+                if (rating.isPresent()) {
+                    filmInTableDtos.get(i).setUserRating(rating.get().getRating());
+                    filmInTableDtos.get(i).setRatingId(rating.get().getId());
+                } else {
+                    filmInTableDtos.get(i).setUserRating(-1);
+                    filmInTableDtos.get(i).setRatingId(-1L);
+                }
+            }
+        }
+
+        return filmInTableDtos;
+    }
+
+    public Film getFilmById(Long id) {
+        return this.filmRepository.getById(id);
     }
 
     public List<Film> getAllFilms() {

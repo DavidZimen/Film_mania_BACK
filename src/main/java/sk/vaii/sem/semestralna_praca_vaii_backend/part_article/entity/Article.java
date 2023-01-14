@@ -1,5 +1,6 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_article.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.entities.AppUser;
 

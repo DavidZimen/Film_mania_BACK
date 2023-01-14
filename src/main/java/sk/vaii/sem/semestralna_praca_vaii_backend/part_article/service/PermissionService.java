@@ -13,4 +13,8 @@ public class PermissionService {
     public boolean isAuthor(Long id) {
         return this.roleRepository.findUserRole(id).getName().equals(ConstantsUtil.AUTHOR_ROLE);
     }
+
+    public boolean isAdmin(Long id) {
+        return this.roleRepository.findUserRole(id).getName().equals(ConstantsUtil.ADMIN_ROLE);
+    }
 }

@@ -1,11 +1,13 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -14,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Film {
+public class Film implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +64,7 @@ public class Film {
     private List<Genre> genres;
 
     @OneToMany(mappedBy = "film")
+    @JsonIgnore
     private List<Rating> ratings;
 
     @OneToOne(cascade = CascadeType.ALL)

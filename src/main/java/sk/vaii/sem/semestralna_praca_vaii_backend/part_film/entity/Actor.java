@@ -8,6 +8,7 @@ import lombok.Setter;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.entities.AppUser;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Actor {
+public class Actor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

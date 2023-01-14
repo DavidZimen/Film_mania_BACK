@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.ActorAddDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.ActorUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Actor;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.service.ActorService;
 
@@ -34,14 +36,23 @@ public class ActorController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<Actor> addActor(@RequestBody Actor actor) {
-        return new ResponseEntity<>(this.actorService.addActor(actor), HttpStatus.OK);
+    public ResponseEntity<Actor> addActor(@RequestBody ActorAddDto actorAddDto) {
+        return new ResponseEntity<>(this.actorService.addActor(actorAddDto), HttpStatus.OK);
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<Actor> updateActor(@RequestBody ActorUpdateDto actorUpdateDto) {
+        return new ResponseEntity<>(this.actorService.updateActor(actorUpdateDto), HttpStatus.OK);
     }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteActor(@PathVariable("id") Long id) {
-        this.actorService.deleteActor(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            this.actorService.deleteActor(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
 }

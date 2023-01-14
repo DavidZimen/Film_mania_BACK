@@ -25,7 +25,7 @@ public class ArticleController {
     private final PermissionService permissionService;
 
     private boolean isAuthor(Long id) {
-        return this.permissionService.isAuthor(id);
+        return this.permissionService.isAuthor(id) || this.permissionService.isAdmin(id);
     }
 
     @GetMapping("all")

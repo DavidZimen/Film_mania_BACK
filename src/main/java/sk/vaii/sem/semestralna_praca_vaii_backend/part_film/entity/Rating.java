@@ -1,11 +1,14 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.entities.AppUser;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "rating")
@@ -13,7 +16,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rating {
+public class Rating implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,10 @@ public class Rating {
 
     @Column(name = "rating", nullable = false)
     private int rating;
+
+    @ManyToOne
+    @JoinColumn(name = "app_user_id", nullable = false)
+    private AppUser appUser;
 
     @ManyToOne
     @JoinColumn(name = "film_id", nullable = false)

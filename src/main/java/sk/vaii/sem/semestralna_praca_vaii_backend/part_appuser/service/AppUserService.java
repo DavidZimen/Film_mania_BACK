@@ -69,7 +69,9 @@ public class AppUserService implements UserDetailsService {
         appUser.setAvatar(appUserAvatar);
 
         AppUser registeredAppUser = this.appUserRepository.save(appUser);
-        registeredAppUser.getAvatar().setAvatarData(ImageUtil.decompressImage(registeredAppUser.getAvatar().getAvatarData()));
+        if (registeredAppUser.getAvatar() != null) {
+            registeredAppUser.getAvatar().setAvatarData(ImageUtil.decompressImage(registeredAppUser.getAvatar().getAvatarData()));
+        }
 
         return this.appUserMapper.appUserToLoggedInUser(registeredAppUser);
     }

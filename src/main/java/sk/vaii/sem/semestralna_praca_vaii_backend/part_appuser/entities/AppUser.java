@@ -1,11 +1,13 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.entity.Article;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Rating;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_security.entities.Role;
 
 import javax.persistence.*;
@@ -50,7 +52,12 @@ public class AppUser implements Serializable, UserDetails {
     private AppUserAvatar avatar;
 
     @OneToMany(mappedBy = "author")
+    @JsonIgnore
     private List<Article> article;
+
+    @OneToMany(mappedBy = "appUser")
+    @JsonIgnore
+    private List<Rating> ratings;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
