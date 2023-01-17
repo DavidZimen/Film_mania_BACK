@@ -39,7 +39,7 @@ public class Film implements Serializable {
     @JoinColumn(name = "director_id", nullable = false)
     private Director director;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "film_actor",
             joinColumns = @JoinColumn(
@@ -51,7 +51,7 @@ public class Film implements Serializable {
     )
     private List<Actor> actors;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "film_genre",
             joinColumns = @JoinColumn(
@@ -63,11 +63,11 @@ public class Film implements Serializable {
     )
     private List<Genre> genres;
 
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Rating> ratings;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "film_image_id", referencedColumnName = "id")
     private FilmPartImage filmImage;
 }

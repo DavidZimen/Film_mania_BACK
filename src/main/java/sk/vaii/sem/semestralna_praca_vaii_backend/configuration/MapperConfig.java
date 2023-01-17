@@ -41,4 +41,9 @@ public class MapperConfig {
     ActorMapper actorMapper() {
         return Mappers.getMapper(ActorMapper.class);
     }
+
+    @Bean
+    DirectorMapper directorMapper() {
+        return Mappers.getMapper(DirectorMapper.class);
+    }
 }

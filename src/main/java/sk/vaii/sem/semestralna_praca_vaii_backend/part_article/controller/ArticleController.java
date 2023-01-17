@@ -13,6 +13,7 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.service.Permissio
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -35,7 +36,12 @@ public class ArticleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ArticleInMainListDto>> getArticleById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(this.articleService.findArticleById(id), HttpStatus.OK);
+        try {
+            Optional<ArticleInMainListDto> article = this.articleService.findArticleById(id);
+            return new ResponseEntity<>(article, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("author_articles/{author_id}")

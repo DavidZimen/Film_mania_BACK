@@ -39,4 +39,8 @@ public class FilmPartImageService {
 
         return this.filmPartImageRepository.save(filmPartImage);
     }
+
+    public Optional<FilmPartImage> getImageOfFilm(Long filmId) {
+        return this.filmPartImageRepository.getImageOfFilm(filmId);
+    }
 }

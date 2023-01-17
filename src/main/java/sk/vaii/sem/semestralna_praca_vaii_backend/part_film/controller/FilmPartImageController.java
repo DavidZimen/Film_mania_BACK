@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.service.FilmPartImageService;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/filmPartImage")
@@ -33,5 +35,10 @@ public class FilmPartImageController {
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("getByFilm/{filmId}")
+    ResponseEntity<Optional<FilmPartImage>> getImageOfFilm(@PathVariable("filmId")Long filmId) {
+        return new ResponseEntity<>(this.filmPartImageService.getImageOfFilm(filmId), HttpStatus.OK);
     }
 }

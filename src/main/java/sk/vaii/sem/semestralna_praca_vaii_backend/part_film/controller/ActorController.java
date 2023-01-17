@@ -35,6 +35,11 @@ public class ActorController {
         return new ResponseEntity<>(this.actorService.getAllActors(), HttpStatus.OK);
     }
 
+    @GetMapping("allOfFilm/{filmId}")
+    public ResponseEntity<List<Actor>> getActorsOfFilm(@PathVariable("filmId") Long filmId) {
+        return new ResponseEntity<>(this.actorService.getActorsOfFilm(filmId), HttpStatus.OK);
+    }
+
     @PostMapping("add")
     public ResponseEntity<Actor> addActor(@RequestBody ActorAddDto actorAddDto) {
         return new ResponseEntity<>(this.actorService.addActor(actorAddDto), HttpStatus.OK);

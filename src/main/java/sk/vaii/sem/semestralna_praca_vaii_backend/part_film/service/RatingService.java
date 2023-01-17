@@ -22,7 +22,6 @@ import java.util.Optional;
 public class RatingService {
 
     private final RatingRepository ratingRepository;
-    private final RatingMapper ratingMapper;
     private final AppUserService appUserService;
     private final FilmRepository filmService;
 
@@ -62,5 +61,9 @@ public class RatingService {
         rating.setRating(ratingUpdateDto.getRating());
 
         return this.ratingRepository.save(rating);
+    }
+
+    public List<Rating> getRatingsOfFilm(Long filmId) {
+        return this.ratingRepository.getRatingsOfFilm(filmId);
     }
 }

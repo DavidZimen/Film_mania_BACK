@@ -33,15 +33,24 @@ public class GenreController {
         return new ResponseEntity<>(this.genreService.getAllGenres(), HttpStatus.OK);
     }
 
+    @GetMapping("allOfFilm/{filmId}")
+    public ResponseEntity<List<Genre>> getGenresOfFilm(@PathVariable("filmId") Long filmId) {
+        return new ResponseEntity<>(this.genreService.getGenresOfFilm(filmId), HttpStatus.OK);
+    }
+
     @PostMapping("add")
-    public ResponseEntity<Genre> addGenre(@RequestBody Genre Genre) {
-        return new ResponseEntity<>(this.genreService.addGenre(Genre), HttpStatus.OK);
+    public ResponseEntity<Genre> addGenre(@RequestParam String genreName) {
+        return new ResponseEntity<>(this.genreService.addGenre(genreName), HttpStatus.OK);
     }
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteGenre(@PathVariable("id") Long id) {
-        this.genreService.deleteGenre(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            this.genreService.deleteGenre(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_film.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.ActorMapper;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.ActorAddDto;
@@ -40,7 +41,7 @@ public class ActorService {
     }
 
     public List<Actor> getAllActors() {
-        return this.actorRepository.findAll();
+        return this.actorRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Optional<Actor> getActorById(Long id) {
@@ -49,6 +50,10 @@ public class ActorService {
 
     public Optional<Actor> getActorByName(String name) {
         return this.actorRepository.findByName(name);
+    }
+
+    public List<Actor> getActorsOfFilm(Long filmId) {
+        return this.actorRepository.getActorsOfFilm(filmId);
     }
 
     public void deleteActor(Long id) {

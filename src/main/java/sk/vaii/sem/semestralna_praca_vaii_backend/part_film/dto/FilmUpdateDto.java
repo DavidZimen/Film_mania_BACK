@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 
 import java.util.List;
 
@@ -11,13 +12,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class FilmAddDto {
+public class FilmUpdateDto {
+    private Long id;
     private String title;
     private String description;
     private int year;
     private int duration;
     private Long directorId;
-    private Long image_id;
+    private FilmPartImage image_id;
     private List<Long> actorIds;
     private List<Long> genreIds;
 }
