@@ -9,7 +9,9 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.ActorUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Actor;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.ActorRepository;
+import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,4 +67,13 @@ public class ActorService {
         }
     }
 
+    public List<SearchResultDto> search(String query) {
+        List<SearchResultDto> actors = new ArrayList<>();
+
+        actors.add(new SearchResultDto("Jean Claude", "Actor", 1));
+        actors.add(new SearchResultDto("Jean Claude Van", "Actor", 2));
+        actors.add(new SearchResultDto("Jean Claude 3", "Actor", 3));
+
+        return actors;
+    }
 }

@@ -9,6 +9,7 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmInTableDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.*;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.FilmRepository;
+import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,5 +146,15 @@ public class FilmService {
 
     public List<Film> getAllFilms() {
         return this.filmRepository.findAll();
+    }
+
+    public List<SearchResultDto> search(String query) {
+        List<SearchResultDto> films = new ArrayList<>();
+
+        films.add(new SearchResultDto("Die Hard", "Film", 1));
+        films.add(new SearchResultDto("Titanic", "Film", 2));
+        films.add(new SearchResultDto("Dedko", "Film", 3));
+
+        return films;
     }
 }
