@@ -21,9 +21,6 @@ public class SearchConfig {
     @Value("${apiconfig.api-version}")
     private String apiVersion;
 
-    @Value("${apiconfig.url}")
-    private String url;
-
     @Bean
     @ConfigurationProperties(prefix = "apiconfig")
     public ApiPropertiesConfig apiPropertiesConfig() {
