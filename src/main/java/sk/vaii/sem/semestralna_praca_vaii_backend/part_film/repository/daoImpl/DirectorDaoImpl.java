@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.util.List;
 
 public class DirectorDaoImpl implements DirectorDao {
 
@@ -31,5 +32,22 @@ public class DirectorDaoImpl implements DirectorDao {
 
         TypedQuery<Director> query = em.createQuery(cq);
         return query.getSingleResult();
+    }
+
+    @Override
+    public List<Director> searchDirectors(String query) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Director> cq = cb.createQuery(Director.class);
+        Root<Director> director = cq.from(Director.class);
+
+        cq.select(director)
+                .where(
+                        cb.like(
+                                cb.upper(director.get("name")),
+                                "%" + query.toUpperCase() + "%"
+                        )
+                );
+
+        return em.createQuery(cq).getResultList();
     }
 }

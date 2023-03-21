@@ -10,14 +10,16 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.*;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.FilmRepository;
 import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.Searchable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class FilmService {
+public class FilmService implements Searchable {
 
     private final FilmRepository filmRepository;
     private final FilmPartImageService filmPartImageService;
@@ -148,13 +150,14 @@ public class FilmService {
         return this.filmRepository.findAll();
     }
 
+    @Override
     public List<SearchResultDto> search(String query) {
-        List<SearchResultDto> films = new ArrayList<>();
-
-        films.add(new SearchResultDto("Die Hard", "Film", 1));
-        films.add(new SearchResultDto("Titanic", "Film", 2));
-        films.add(new SearchResultDto("Dedko", "Film", 3));
-
-        return films;
+        return filmMapper.toSearchResultDtoList(filmRepository.searchFilms(query))
+                .stream()
+                .peek(film -> {
+                    film.setResultType("Film");
+                    film.setResultLink("http://localhost:4201/films_list/film/" + film.getResultLocalId());
+                })
+                .collect(Collectors.toList());
     }
 }

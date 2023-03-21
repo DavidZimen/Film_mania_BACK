@@ -33,4 +33,21 @@ public class ActorDaoImpl implements ActorDao {
         TypedQuery<Actor> query = em.createQuery(cq);
         return query.getResultList();
     }
+
+    @Override
+    public List<Actor> searchActors(String query) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Actor> cq = cb.createQuery(Actor.class);
+        Root<Actor> actor = cq.from(Actor.class);
+
+        cq.select(actor)
+                .where(
+                        cb.like(
+                                cb.upper(actor.get("name")),
+                                "%" + query.toUpperCase() + "%"
+                        )
+                );
+
+        return em.createQuery(cq).getResultList();
+    }
 }

@@ -17,4 +17,7 @@ public class SearchResultDto {
 
     @JsonProperty("resultLocalId")
     private Integer resultLocalId;
+
+    @JsonProperty("resultLink")
+    private String resultLink;
 }

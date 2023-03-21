@@ -9,13 +9,16 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.DirectorUpdateDt
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Director;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.DirectorRepository;
+import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.Searchable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class DirectorService {
+public class DirectorService implements Searchable {
 
     private final DirectorRepository directorRepository;
     private final DirectorMapper directorMapper;
@@ -66,6 +69,14 @@ public class DirectorService {
         } else {
             throw new IllegalStateException("Director can't be assigned to any movie.");
         }
+    }
+
+    @Override
+    public List<SearchResultDto> search(String query) {
+        return directorMapper.toSearchResultDtoList(directorRepository.searchDirectors(query))
+                .stream()
+                .peek(director -> director.setResultType("Director"))
+                .collect(Collectors.toList());
     }
     
 }

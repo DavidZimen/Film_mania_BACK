@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface ActorDao {
     List<Actor> getActorsOfFilm(Long filmId);
+
+    List<Actor> searchActors(String query);
 }

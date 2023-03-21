@@ -10,14 +10,15 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Actor;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.ActorRepository;
 import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
+import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.Searchable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ActorService {
+public class ActorService implements Searchable {
     private final ActorRepository actorRepository;
     private final ActorMapper actorMapper;
     private final FilmPartImageService filmPartImageService;
@@ -67,13 +68,11 @@ public class ActorService {
         }
     }
 
+    @Override
     public List<SearchResultDto> search(String query) {
-        List<SearchResultDto> actors = new ArrayList<>();
-
-        actors.add(new SearchResultDto("Jean Claude", "Actor", 1));
-        actors.add(new SearchResultDto("Jean Claude Van", "Actor", 2));
-        actors.add(new SearchResultDto("Jean Claude 3", "Actor", 3));
-
-        return actors;
+        return actorMapper.toSearchResultDtoList(actorRepository.searchActors(query))
+                .stream()
+                .peek(actor -> actor.setResultType("Actor"))
+                .collect(Collectors.toList());
     }
 }
