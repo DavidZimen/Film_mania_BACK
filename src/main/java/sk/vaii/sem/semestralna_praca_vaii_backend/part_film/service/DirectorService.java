@@ -1,5 +1,7 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_film.service;
 
+import com.scheidtbachmann.ps.search.searchextension.dto.SearchResult;
+import com.scheidtbachmann.ps.search.searchextension.service.Searchable;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,6 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.DirectorUpdateDt
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Director;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.DirectorRepository;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.Searchable;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class DirectorService implements Searchable {
+public class DirectorService implements Searchable<SearchResult> {
 
     private final DirectorRepository directorRepository;
     private final DirectorMapper directorMapper;
@@ -72,10 +72,14 @@ public class DirectorService implements Searchable {
     }
 
     @Override
-    public List<SearchResultDto> search(String query) {
-        return directorMapper.toSearchResultDtoList(directorRepository.searchDirectors(query))
+    public List<SearchResult> search(String query) {
+        return directorRepository.searchDirectors(query)
                 .stream()
-                .peek(director -> director.setResultType("Director"))
+                .map(director -> {
+                    SearchResult result = directorMapper.toSearchResultDto(director);
+                    result.setResultType("Director");
+                    return result;
+                })
                 .collect(Collectors.toList());
     }
     

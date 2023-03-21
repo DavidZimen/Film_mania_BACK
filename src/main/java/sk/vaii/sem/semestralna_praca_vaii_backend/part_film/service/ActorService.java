@@ -1,5 +1,7 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_film.service;
 
+import com.scheidtbachmann.ps.search.searchextension.dto.SearchResult;
+import com.scheidtbachmann.ps.search.searchextension.service.Searchable;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,6 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.ActorUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Actor;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.FilmPartImage;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.ActorRepository;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.Searchable;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ActorService implements Searchable {
+public class ActorService implements Searchable<SearchResult> {
     private final ActorRepository actorRepository;
     private final ActorMapper actorMapper;
     private final FilmPartImageService filmPartImageService;
@@ -69,10 +69,14 @@ public class ActorService implements Searchable {
     }
 
     @Override
-    public List<SearchResultDto> search(String query) {
-        return actorMapper.toSearchResultDtoList(actorRepository.searchActors(query))
+    public List<SearchResult> search(String query) {
+        return actorRepository.searchActors(query)
                 .stream()
-                .peek(actor -> actor.setResultType("Actor"))
+                .map(actor -> {
+                    SearchResult result = actorMapper.toSearchResultDto(actor);
+                    result.setResultType("Actor");
+                    return result;
+                })
                 .collect(Collectors.toList());
     }
 }

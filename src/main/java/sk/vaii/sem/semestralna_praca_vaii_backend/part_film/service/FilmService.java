@@ -1,5 +1,7 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.part_film.service;
 
+import com.scheidtbachmann.ps.search.searchextension.dto.SearchResult;
+import com.scheidtbachmann.ps.search.searchextension.service.Searchable;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.FilmMapper;
@@ -9,8 +11,6 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmInTableDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.*;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.repository.FilmRepository;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.Searchable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class FilmService implements Searchable {
+public class FilmService implements Searchable<SearchResult> {
 
     private final FilmRepository filmRepository;
     private final FilmPartImageService filmPartImageService;
@@ -151,12 +151,14 @@ public class FilmService implements Searchable {
     }
 
     @Override
-    public List<SearchResultDto> search(String query) {
-        return filmMapper.toSearchResultDtoList(filmRepository.searchFilms(query))
+    public List<SearchResult> search(String query) {
+        return filmRepository.searchFilms(query)
                 .stream()
-                .peek(film -> {
-                    film.setResultType("Film");
-                    film.setResultLink("http://localhost:4201/films_list/film/" + film.getResultLocalId());
+                .map(film -> {
+                    SearchResult result = filmMapper.toSearchResultDto(film);
+                    result.setResultType("Film");
+                    result.setResultLink("http://localhost:4201/films_list/film/" + result.getResultLocalId());
+                    return result;
                 })
                 .collect(Collectors.toList());
     }

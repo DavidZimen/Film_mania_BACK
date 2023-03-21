@@ -1,5 +1,7 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.mapper;
 
+import com.scheidtbachmann.ps.search.searchextension.dto.SearchResult;
+import com.scheidtbachmann.ps.search.searchextension.mapper.SearchResultMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmAddDto;
@@ -7,8 +9,6 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmDetailDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmInTableDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.FilmUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Film;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.mapper.SearchResultMapper;
 
 import java.util.List;
 
@@ -28,8 +28,5 @@ public interface FilmMapper extends SearchResultMapper<Film> {
     @Override
     @Mapping(target = "name", source = "value.title")
     @Mapping(target = "resultLocalId", source = "value.id")
-    SearchResultDto toSearchResultDto(Film value);
-
-    @Override
-    List<SearchResultDto> toSearchResultDtoList(List<Film> values);
+    SearchResult toSearchResultDto(Film value);
 }

@@ -13,7 +13,6 @@ import sk.vaii.sem.semestralna_praca_vaii_backend.mapper.ArticleMapper;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.repository.ArticleImageRepository;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_article.repository.ArticleRepository;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_appuser.service.AppUserService;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -96,7 +95,4 @@ public class ArticleService {
         return this.articleImageRepository.save(articleImage);
     }
 
-    public List<SearchResultDto> search(String query) {
-        return new ArrayList<>();
-    }
 }

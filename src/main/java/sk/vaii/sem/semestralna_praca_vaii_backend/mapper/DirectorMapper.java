@@ -1,12 +1,12 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.mapper;
 
+import com.scheidtbachmann.ps.search.searchextension.dto.SearchResult;
+import com.scheidtbachmann.ps.search.searchextension.mapper.SearchResultMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.DirectorAddDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.dto.DirectorUpdateDto;
 import sk.vaii.sem.semestralna_praca_vaii_backend.part_film.entity.Director;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.mapper.SearchResultMapper;
 
 import java.util.List;
 
@@ -18,8 +18,5 @@ public interface DirectorMapper extends SearchResultMapper<Director> {
     @Override
     @Mapping(target = "name", source = "value.name")
     @Mapping(target = "resultLocalId", source = "value.id")
-    SearchResultDto toSearchResultDto(Director value);
-
-    @Override
-    List<SearchResultDto> toSearchResultDtoList(List<Director> values);
+    SearchResult toSearchResultDto(Director value);
 }

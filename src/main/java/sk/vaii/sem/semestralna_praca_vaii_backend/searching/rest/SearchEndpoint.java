@@ -1,33 +1,38 @@
 package sk.vaii.sem.semestralna_praca_vaii_backend.searching.rest;
 
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import com.scheidtbachmann.ps.search.searchextension.api.SearchApi;
+import com.scheidtbachmann.ps.search.searchextension.dto.SearchResult;
+import com.scheidtbachmann.ps.search.searchextension.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.dto.SearchResultDto;
-import sk.vaii.sem.semestralna_praca_vaii_backend.searching.service.SearchService;
 
+import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
-public class SearchEndpoint {
+public class SearchEndpoint implements SearchApi<SearchResult> {
 
     @Autowired
-    private SearchService searchService;
+    private SearchService<SearchResult> searchService;
 
-    @RequestMapping(value = "/v1/{tenantName}/search", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<List<SearchResultDto>> search(
-            @Parameter(name = "tenantName", description = "Unique name of tenant in multitenant system", required = true, in = ParameterIn.PATH) @PathVariable("tenantName") String tenantName,
-            @Parameter(name = "query", required = true, in = ParameterIn.QUERY) String query
-    ) {
+    @Value ("${apiconfig.search-path}")
+    private String searchPath;
+
+    @Override
+    public ResponseEntity<List<SearchResult>> search(@Size(min = 1, max = 255) String tenantName, String query) throws ExecutionException, InterruptedException {
         try {
             return ResponseEntity.ok().body(searchService.search(query));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @Override
+    public ResponseEntity<String> loadSearchPath() {
+        return ResponseEntity.ok()
+                .body(this.searchPath);
     }
 }

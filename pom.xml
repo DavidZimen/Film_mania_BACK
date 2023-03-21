@@ -99,7 +99,11 @@
             <artifactId>swagger-annotations</artifactId>
             <version>2.2.8</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.scheidtbachmann.ps.search</groupId>
+            <artifactId>search-extension</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
