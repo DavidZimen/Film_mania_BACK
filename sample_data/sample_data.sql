@@ -4,6 +4,13 @@ INSERT INTO director VALUES (3, '', 'Joe Russo', NULL);
 INSERT INTO director VALUES (4, '', 'Anthony Russo', NULL);
 INSERT INTO director VALUES (5, '', 'Joseph Kozinski', NULL);
 INSERT INTO director VALUES (6, '', 'David Cameron', NULL);
+INSERT INTO director VALUES (7, '', 'Steven Spielberg', NULL);
+INSERT INTO director VALUES (8, '', 'Alfred Hitchcock', NULL);
+INSERT INTO director VALUES (9, '', 'James Cameron', NULL);
+INSERT INTO director VALUES (10, '', 'Quentin Tarantino', NULL);
+INSERT INTO director VALUES (11, '', 'Paul Thomas Anderson', NULL);
+INSERT INTO director VALUES (12, '', 'Christopher Nolan', NULL);
+INSERT INTO director VALUES (13, '', 'Stanley Kubrick', NULL);
 
 INSERT INTO actor VALUES (1, '', 'Dwayne Johnson', NULL);
 INSERT INTO actor VALUES (2, '', 'Leaonardo di Caprio', NULL);
@@ -15,6 +22,13 @@ INSERT INTO actor VALUES (7, '', 'Judy Dench', NULL);
 INSERT INTO actor VALUES (8, '', 'Adam Sandler', NULL);
 INSERT INTO actor VALUES (9, '', 'Leaonardo Pozolivo', NULL);
 INSERT INTO actor VALUES (10, '', 'Maryl Streep', NULL);
+INSERT INTO actor VALUES (11, '', 'Denzel Washington', NULL);
+INSERT INTO actor VALUES (12, '', 'Humphrey Bogart', NULL);
+INSERT INTO actor VALUES (13, '', 'Sidney Poitier', NULL);
+INSERT INTO actor VALUES (14, '', 'Ingrid Bergman', NULL);
+INSERT INTO actor VALUES (15, '', 'Cate Blanchett', NULL);
+INSERT INTO actor VALUES (16, '', 'Kate Winslet', NULL);
+INSERT INTO actor VALUES (17, '', 'James Stewart', NULL);
 
 INSERT INTO film VALUES (1, '', 201, 'Titanic', 1997, 6, NULL);
 INSERT INTO film VALUES (2, '', 201, 'Avengers', 2012, 3, NULL);
