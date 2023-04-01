@@ -18,6 +18,9 @@ public class SearchConfig extends SearchExtensionConfigAdapter<SearchResult> {
     @Value("${apiconfig.api-version}")
     private String apiVersion;
 
+    @Value("${apiconfig.search-path}")
+    private String searchPath;
+
     @Override
     protected Logger getLogger() {
         return LOGGER;
@@ -28,9 +31,11 @@ public class SearchConfig extends SearchExtensionConfigAdapter<SearchResult> {
     public ApiPropertiesConfig apiPropertiesConfig() {
         ApiPropertiesConfig apiPropertiesConfig = new ApiPropertiesConfig();
         apiPropertiesConfig.setApiVersion(apiVersion);
+        apiPropertiesConfig.setSearchPath(searchPath);
 
         //log information
         LOGGER.info("API version {}.", apiPropertiesConfig.getApiVersion());
+        LOGGER.info("Path available for searching {}.", apiPropertiesConfig.getSearchPath());
 
         return apiPropertiesConfig;
     }
