@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>sk.vaii.sem</groupId>
-    <artifactId>Semestralna_praca_VAII_backend</artifactId>
+    <artifactId>Film_mania_BACK</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Semestralna_praca_VAII_backend</name>
-    <description>Semestralna_praca_VAII_backend</description>
+    <name>Film_mania_BACK</name>
+    <description>Film_mania_BACK</description>
 
     <dependencies>
         <dependency>
